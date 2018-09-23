@@ -1,6 +1,11 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
+import Book from './components/book'
+import Shelf from './components/shelf'
+import Main from './pages/main'
+import Search from './pages/search'
 
 class BooksApp extends React.Component {
   state = {
@@ -13,7 +18,15 @@ class BooksApp extends React.Component {
     showSearchPage: false
   }
 
+
   render() {
+    return(
+    <div>
+      <Route exact path="/" component={Main} />
+      <Route exact path="/search" component={Search} />
+    </div>
+    );
+
     return (
       <div className="app">
         {this.state.showSearchPage ? (
