@@ -1,15 +1,14 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import {Link} from 'react-router-dom'
 import * as BooksAPI from '.././BooksAPI'
 import Shelf from '../components/shelf'
-import Book from '../components/book'
 
 
 class Main extends React.Component {
 	state = {
-		books: []
+		books: [],
 	}
+
 	componentDidMount() {
 		BooksAPI.getAll()
 		.then(books => { 
@@ -26,9 +25,9 @@ class Main extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf name="Currently Reading" book=""/>
-                <Shelf name="Want to Read" book=""/>
-                <Shelf name="Read" book=""/>
+                <Shelf name="Currently Reading" book={this.state.books.filter( book => book.shelf === "currentlyReading")} />
+                <Shelf name="Want to Read" book={this.state.books.filter( book => book.shelf === "wantToRead")} />
+                <Shelf name="Books I Read" book={this.state.books.filter( book => book.shelf === "read")} />
               </div>
             </div>
             <div className="open-search">

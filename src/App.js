@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import {Link} from 'react-router-dom'
 import './App.css'
 import Main from './pages/main'
 import Search from './pages/search'
