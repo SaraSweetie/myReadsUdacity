@@ -16,7 +16,7 @@ class Search extends React.Component {
             <div className="search-books-bar">
               <Link className="close-search" to="/">Close</Link>
               <div className="search-books-input-wrapper">
-                <input value={this.state.query} onChange={this.updateSearch} type="text" placeholder="Search by title or author"/>
+                <input value={this.state.query} onChange={e => this.updateSearch(e)} type="text" placeholder="Search by title or author"/>
               </div>
             </div>
             <div className="search-books-results">
@@ -28,6 +28,7 @@ class Search extends React.Component {
 
 	updateSearch(e) {
 		console.log('search bar updated');
+		this.setState({query: e.target.value})
 	}
 }
 
