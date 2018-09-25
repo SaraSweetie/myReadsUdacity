@@ -1,8 +1,17 @@
 import React from 'react'
+import {update} from '../BooksAPI'
 
 class Book extends React.Component {
 	componentDidMount() {
         console.log(this);
+    }
+    updateShelf = function(e){
+        //this.setState({value: e.target.value});
+        console.log(e.target.value);
+
+        //BooksAPI.update(this.state.book, shelf) {
+
+        //}
     }
     render () {
 		return (
@@ -11,7 +20,7 @@ class Book extends React.Component {
                     <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${this.props.book.imageLinks.smallThumbnail}")` }}></div>
                     <div className="book-shelf-changer">
-                        <select value="this.props.book.shelf">
+                        <select /*onChange={this.updateShelf}*/ value={this.props.book.shelf || "none"}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>

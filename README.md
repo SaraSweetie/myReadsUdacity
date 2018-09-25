@@ -11,6 +11,13 @@ To get started developing right away:
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 
+## Resources Used
+
+* Ryan Waite - Udacity Coach [Project Walkthrough](https://www.youtube.com/watch?v=acJHkd6K5kI&amp=&feature=youtu.be)
+* Forest - Fellow FEND student [Project Walkthrough](https://www.youtube.com/watch?v=bpKI3R0nf7E)
+* Stackoverflow [OnChange event using React JS for drop down](https://stackoverflow.com/questions/28868071/onchange-event-using-react-js-for-drop-down)
+*
+
 ## What You're Getting
 ```bash
 ├── CONTRIBUTING.md
