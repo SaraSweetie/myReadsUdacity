@@ -17,6 +17,7 @@ To get started developing right away:
 * Forest - Fellow FEND student [Project Walkthrough](https://www.youtube.com/watch?v=bpKI3R0nf7E)
 * Stackoverflow [OnChange event using React JS for drop down](https://stackoverflow.com/questions/28868071/onchange-event-using-react-js-for-drop-down)
 * Stackoverflow [React - How to get the value of an input field?](https://stackoverflow.com/questions/36683770/react-how-to-get-the-value-of-an-input-field)
+* [React Docs - Controlled Components](https://reactjs.org/docs/forms.html#controlled-components)
 
 ## What You're Getting
 ```bash
