@@ -19,7 +19,7 @@ class Search extends React.Component {
 		console.log(this.state.query)
 		search(this.state.query)
 			.then( results => { 
-  			console.log(results);
+  			console.log(results)
   			}).catch( error => {
   				console.log(`there was an ${error}`)
   			})
