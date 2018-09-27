@@ -1,5 +1,5 @@
 import React from 'react'
-//import {update} from '../BooksAPI'
+import * as BookAPI from '../BooksAPI'
 
 class Book extends React.Component {
     constructor(props) {
@@ -8,7 +8,7 @@ class Book extends React.Component {
              books: []
             };
     }
-    
+
 	componentDidMount() {
         console.log(this);
     }
@@ -24,7 +24,7 @@ class Book extends React.Component {
 			<li>
                 <div className="book">
                     <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${this.props.book.imageLinks.smallThumbnail}")` }}></div>
+                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${this.props.book.imageLinks.smallThumbnail}")` || `(url("../images/noCover.jpg")` }}></div>
                     <div className="book-shelf-changer">
                         <select onChange={this.updateShelf} value={this.props.book.shelf || "none"}>
                             <option value="move" disabled>Move to...</option>
@@ -36,7 +36,7 @@ class Book extends React.Component {
                     </div>
                     </div>
                     <div className="book-title">{this.props.book.title}</div>
-                    <div className="book-authors">{this.props.book.authors} </div>
+                    <div className="book-authors">{this.props.book.authors}</div>
                 </div>
             </li>
 		);

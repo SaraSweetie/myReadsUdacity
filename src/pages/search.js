@@ -23,7 +23,13 @@ class Search extends React.Component {
 		if(query){
 		BookAPI.search(this.state.query)
 			.then( results => { 
-  				this.setState({returnedBooks: results})
+				if(results.error) {
+					this.setState({returnedBooks: [] });
+					//print no books
+				}else {
+					this.setState({returnedBooks: results})
+				}
+  				
   				
   				console.log(results)  
   				console.log(this.state.returnedBooks) 
