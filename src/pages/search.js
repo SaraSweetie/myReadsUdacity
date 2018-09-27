@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {search} from '../BooksAPI'
+import * as BookAPI from '../BooksAPI'
 import Book from '../components/book'
 
 class Search extends React.Component {
@@ -19,7 +19,9 @@ class Search extends React.Component {
 	}
 
 	searchBooks (query) {
-		search(this.state.query)
+		console.log(query)
+		if(query){
+		BookAPI.search(this.state.query)
 			.then( results => { 
   				this.setState({returnedBooks: results})
   				
@@ -30,6 +32,10 @@ class Search extends React.Component {
   			}).catch( error => {
   				console.log(`there was an ${error}`)
   			})
+  		}if (this.state.returnedBooks === undefined || this.state.returnedBooks === '') {
+	      console.log('clear the array')
+	      return this.setState({returnedBooks: [] });
+	    }
 	}
 
 	render () {
@@ -44,9 +50,13 @@ class Search extends React.Component {
             <div className="search-books-results">
               <ol className="books-grid">
 				{
-                  	this.state.returnedBooks.map( returnedBooks => {
-                  		return <Book book={returnedBooks} key={returnedBooks.id} />
-                  	})
+                  	this.state.returnedBooks ? (
+                  		this.state.returnedBooks.map( returnedBooks => {
+                  		return <Book book={returnedBooks} key={returnedBooks.id}
+                  		/>
+                  	})):(
+                  	<p>There were no books.</p>
+                  	) 
             	}
               </ol>
             </div>

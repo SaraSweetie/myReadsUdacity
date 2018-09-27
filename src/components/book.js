@@ -2,6 +2,13 @@ import React from 'react'
 //import {update} from '../BooksAPI'
 
 class Book extends React.Component {
+    constructor(props) {
+        super(props);
+            this.state = {
+             books: []
+            };
+    }
+    
 	componentDidMount() {
         console.log(this);
     }
