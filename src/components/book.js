@@ -1,5 +1,5 @@
 import React from 'react'
-import {update} from '../BooksAPI'
+//import {update} from '../BooksAPI'
 
 class Book extends React.Component {
 	componentDidMount() {

@@ -7,33 +7,30 @@ class Search extends React.Component {
 	constructor(props) {
 	      super(props);
 	      this.state = {
-	      	 books: [],
-	         query: '',
-	         returnedBooks: []
+	      	books: [],
+	        query: '',
+	        returnedBooks: []
 	      };
 	}
 
 	updateSearch(query) {
 		console.log('search bar updated');
-		this.setState({query: query.trim()}, this.searchBooks(query));
+		this.setState({query: query}, this.searchBooks(query));
 	}
 
 	searchBooks (query) {
 		search(this.state.query)
 			.then( results => { 
-  				this.setState({returnedBooks: returnedBooks})
+  				this.setState({returnedBooks: results})
   				
-  				console.log(results) // getting undefined
-  				console.log(this.state.returnedBooks) // getting undefined
+  				console.log(results)  
+  				console.log(this.state.returnedBooks) 
   				console.log(this.state.query)
-
-  				// getting undefined from promise???
 
   			}).catch( error => {
   				console.log(`there was an ${error}`)
   			})
 	}
-
 
 	render () {
 		return (
@@ -46,7 +43,11 @@ class Search extends React.Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-
+				{
+                  	this.state.returnedBooks.map( returnedBooks => {
+                  		return <Book book={returnedBooks} key={returnedBooks.id} />
+                  	})
+            	}
               </ol>
             </div>
           </div>
