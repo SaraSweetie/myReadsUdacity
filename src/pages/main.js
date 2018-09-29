@@ -19,9 +19,9 @@ class Main extends React.Component {
 			this.setState({ books : results})
 		}).catch( error => {
   			console.log(`there was an ${error}`)
-  		})
+  		});
 	}
-	
+
 	render () {
 		return (
            <div className="list-books">
