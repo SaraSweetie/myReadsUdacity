@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import * as BooksAPI from '.././BooksAPI'
 import Shelf from '../components/shelf'
 
-
 class Main extends React.Component {
 	constructor(props) {
 		super(props);

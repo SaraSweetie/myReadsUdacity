@@ -54,7 +54,7 @@ class Search extends React.Component {
 				{
                   	this.state.returnedBooks ? (
                   		this.state.returnedBooks.map( returnedBooks => {
-                  		return <Book book={returnedBooks} key={returnedBooks.id}
+                  		return <Book book={returnedBooks} key={returnedBooks.id} 
                   		/>
                   	})):(
                   	<p>There were no books.</p>

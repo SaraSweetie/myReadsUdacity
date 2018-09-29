@@ -6,6 +6,7 @@ class Book extends React.Component {
         super(props);
             this.state = {
              books: [],
+             Book: [],
              shelf: ''
             };
     } 
@@ -15,18 +16,38 @@ class Book extends React.Component {
     }
 
     updateShelf = (e) => {
+        Book = this.props.book;
+        BooksAPI.update(Book, e.target.value).then(() => {
+                this.setState(state => ({books: state.book
+                .filter(b => b.id !== Book )
+                .concat(Book)}))
+                }
+                )
+            };
+
+
+
+/*
+
         console.log(`Change shelf to ${e.target.value}`);
-        this.setState({shelf: e.target.value});
+        //this.setState({value: e.target.value});
+        //this setp isn't working...?? returns [object, Object]
         BooksAPI.update(this.props.book, e.target.value)
             .then( results => {
+                BooksAPI.getAll().then((books) => {
+                 this.updateShelf()
+              })
+
+
                 //shelf = e.target.value;
-                //this.setState({shelf: e.target.value});
+                //this.setState({setState: e.target.value});
+                //this setp isn't working...?? returns null
                 console.log(`book changed to ${results}`)
                 //this setp isn't working...?? returns [object, Object]
             }).catch( error => {
                 console.log(`there was an ${error} when changing shelf`)
             });
-    }
+    }*/
 
     render () {
         return (
