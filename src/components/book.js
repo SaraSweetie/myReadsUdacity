@@ -16,9 +16,15 @@ class Book extends React.Component {
 
     updateShelf = (e) => {
         console.log(`Change shelf to ${e.target.value}`);
+        this.setState({shelf: e.target.value});
         BooksAPI.update(this.props.book, e.target.value)
             .then( results => {
-                this.setState({value: e.target.value});
+                //shelf = e.target.value;
+                //this.setState({shelf: e.target.value});
+                console.log(`book changed to ${results}`)
+                //this setp isn't working...?? returns [object, Object]
+            }).catch( error => {
+                console.log(`there was an ${error} when changing shelf`)
             });
     }
 

@@ -30,9 +30,9 @@ class Main extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf name="Currently Reading" books={this.state.books.filter( book => book.shelf === "currentlyReading")} />
-                <Shelf name="Want to Read" books={this.state.books.filter( book => book.shelf === "wantToRead")} />
-                <Shelf name="Books I Read" books={this.state.books.filter( book => book.shelf === "read")} />
+                <Shelf updateShelf={this.updateShelf} name="Currently Reading" books={this.state.books.filter( book => book.shelf === "currentlyReading")} />
+                <Shelf updateShelf={this.updateShelf} name="Want to Read" books={this.state.books.filter( book => book.shelf === "wantToRead")} />
+                <Shelf updateShelf={this.updateShelf} name="Books I Read" books={this.state.books.filter( book => book.shelf === "read")} />
               </div>
             </div>
             <div className="open-search">
