@@ -5,6 +5,13 @@ import Main from './pages/main'
 import Search from './pages/search'
 
 class BooksApp extends React.Component {
+	constructor(props) {
+        super(props);
+            this.state = {
+             books: []
+            };
+    }
+
   render() {
     return(
     <div>

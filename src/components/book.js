@@ -5,35 +5,14 @@ class Book extends React.Component {
     constructor(props) {
         super(props);
             this.state = {
-             books: [],
-             shelf: ''
+             books: []
             };
     }
-    updateShelf(book, shelf) {
-        BooksAPI.update(this.props.book)
-        console.log(this)
-        this.setState({shelf: book.props.book.shelf})
-    }
-
-	componentDidMount() {
-        //console.log(this);
-    }
-
-/*    componentDidUpdate(){
-        this.updateShelf(book, shelf);
-        BooksAPI.update(this.props.book )
-            .then(results => {
-                //do this
-            }).catch( error => {
-                console.log(`there was an ${error} when updating the book's shelf`)
-            })
-    }*/
-
-    /*updateShelf = function(e){
-        //BooksAPI.update(this.props.book)
+    updateShelf = function(e){
         //this.setState({value: e.target.value});
-        console.log(this.target.value);
-    }*/
+        console.log(e.target.value);
+        BooksAPI.update(this.props.book, e.target.value)
+    }
 
     render () {
 		return (
@@ -42,7 +21,7 @@ class Book extends React.Component {
                     <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${this.props.book.imageLinks.smallThumbnail}")` || `(url("../images/noCover.jpg")` }}></div>
                     <div className="book-shelf-changer">
-                        <select onChange={(e) => this.updateShelf(this.props.book, e.target.value)} value={this.props.book.shelf || "none"}>
+                        <select onChange={ (e) => this.props.updateShelf(this.props.book, e.target.value)} >
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
