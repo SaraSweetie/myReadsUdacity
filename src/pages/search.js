@@ -23,13 +23,12 @@ class Search extends React.Component {
 		if(query){
 		BookAPI.search(this.state.query)
 			.then( results => { 
-				if(results.error) {
+				if(results.error || this.state.returnedBooks === undefined || this.state.returnedBooks === '') {
 					this.setState({returnedBooks: [] });
 					//print no books
 				}else {
 					this.setState({returnedBooks: results})
 				}
-  				
   				
   				console.log(results)  
   				console.log(this.state.returnedBooks) 
@@ -38,10 +37,7 @@ class Search extends React.Component {
   			}).catch( error => {
   				console.log(`there was an ${error}`)
   			})
-  		}if (this.state.returnedBooks === undefined || this.state.returnedBooks === '') {
-	      console.log('clear the array')
-	      return this.setState({returnedBooks: [] });
-	    }
+  		}
 	}
 
 	render () {

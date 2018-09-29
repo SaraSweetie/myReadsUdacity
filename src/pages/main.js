@@ -14,12 +14,14 @@ class Main extends React.Component {
 
 	componentDidMount() {
 		BooksAPI.getAll()
-		.then(books => { 
-			console.log(books);
-			this.setState({books})
-		})
+		.then(results => { 
+			console.log(results);
+			this.setState({ books : results})
+		}).catch( error => {
+  			console.log(`there was an ${error}`)
+  		})
 	}
-
+	
 	render () {
 		return (
            <div className="list-books">
