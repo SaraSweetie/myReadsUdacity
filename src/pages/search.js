@@ -2,6 +2,8 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import * as BookAPI from '../BooksAPI'
 import Book from '../components/book'
+import updateShelf from './main'
+
 
 class Search extends React.Component {
 	constructor(props) {
@@ -9,7 +11,7 @@ class Search extends React.Component {
 	      this.state = {
 	      	books: [],
 	        query: '',
-	        returnedBooks: []
+          returnedBooks: []
 	      };
 	}
 
@@ -20,12 +22,13 @@ class Search extends React.Component {
 
 	searchBooks (query) {
 		console.log(query)
-		if(query){
+
+		if(query.trim() ){
 		BookAPI.search(this.state.query)
 			.then( results => { 
-				if(results.error || this.state.returnedBooks === undefined || this.state.returnedBooks === '') {
+				if(results.error || this.state.returnedBooks === undefined || this.state.returnedBooks === '' || this.state.query.length === 0) {
 					this.setState({returnedBooks: [] });
-					//print no books
+					//There are no books for your search
 				}else {
 					this.setState({returnedBooks: results})
 				}
@@ -51,15 +54,10 @@ class Search extends React.Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-				{
-                  	this.state.returnedBooks ? (
-                  		this.state.returnedBooks.map( returnedBooks => {
-                  		return <Book book={returnedBooks} key={returnedBooks.id} 
-                  		/>
-                  	})):(
-                  	<p>There were no books.</p>
-                  	) 
-            	}
+				        {this.state.returnedBooks.length > 0 ? this.state.returnedBooks.map( returnedBooks => 
+                  <Book key={returnedBooks.id} book={returnedBooks} {...returnedBooks} updateShelf={this.props.updateShelf} />)
+                  : (<p>No books match your seach.</p> ) 
+            	  }
               </ol>
             </div>
           </div>
