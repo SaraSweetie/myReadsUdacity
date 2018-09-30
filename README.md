@@ -1,5 +1,10 @@
 # MyReads Project
-This is a student project for Udacity's Front End Nanodegree program. Using a starter template I broke the file down into React components and added functionality. Like books changing shelves and searching for books and adding them to a shelf.
+This is a student project for Udacity's Front End Nanodegree program. Using a starter template I broke the file down into React components and added functionality.
+
+- A book can change shelf from: Currently reading, Want to Read, Read, or none
+- Searching loads 20 books (Note: only specific search terms return resluts see [SEARCH_TERMS.md](SEARCH_TERMS.md), and Important for more details)
+- Books can be added to a shelf from the search
+
 
 ## To Preview
 
