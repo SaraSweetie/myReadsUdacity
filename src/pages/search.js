@@ -12,6 +12,10 @@ class Search extends React.Component {
 	      };
 	}
 
+	componentDidMount(){
+		console.log(this);
+	}
+
 	updateSearch(query) {
 		console.log('search bar updated');
 		this.setState({query: query}, this.searchBooks(query));
@@ -26,7 +30,9 @@ class Search extends React.Component {
 		}
 
 		if(query.trim() ){
-		BooksAPI.search(this.state.query)
+		BooksAPI.search(this.state.query) // this is logging nothing.... ?
+		
+
 			.then( results => { 
 				if(results.error || this.state.books === undefined || this.state.books === '' || this.state.query.length === 0) {
 					this.setState({books: [] });
