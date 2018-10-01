@@ -2,16 +2,13 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import * as BooksAPI from '../BooksAPI'
 import Book from '../components/book'
-import updateShelf from './main'
-
 
 class Search extends React.Component {
 	constructor(props) {
 	      super(props);
 	      this.state = {
 	      	books: [],
-	        query: '',
-	        value: ''
+	        query: ''
 	      };
 	}
 
@@ -24,6 +21,10 @@ class Search extends React.Component {
 		console.log(query)
 		console.log(this.state.query)
 
+		if( this.state.query.length === 1){
+			this.setState({books: [] });
+		}
+
 		if(query.trim() ){
 		BooksAPI.search(this.state.query)
 			.then( results => { 
@@ -32,17 +33,14 @@ class Search extends React.Component {
 					//There are no books for your search
 				}else {
 					this.setState({books: results})
-					this.setState({value: results})
+					this.updateShelf();
+					console.log('updateShelf running??')
 				}
   				
   			}).catch( error => {
   				console.log(`there was an ${error}`)
   			})
   		}
-	}
-
-	componentDidMount() {
-		this.getBooks()
 	}
 
 	getBooks() {
@@ -58,7 +56,7 @@ class Search extends React.Component {
 	updateShelf = (e, book) => {
         BooksAPI.update(book, e.target.value)
         .then(() => {
-    		this.getBooks()
+    		this.getBooks();
         }).catch( error => {
   			console.log(`updateShelf had an error: ${error}`)
   		});
