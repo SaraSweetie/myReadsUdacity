@@ -23,8 +23,8 @@ const Book = (props) => {
                             </select>
                         </div>
                     </div>
-                    <div className="book-title">{props.book.title} || "no title"</div>
-                    <div className="book-authors">{props.book.authors} || "no author" </div>
+                    <div className="book-title">{props.book.title || "no title" }</div>
+                    <div className="book-authors">{props.book.authors || "no author" }</div>
                 </div>
             </li>
 		);
