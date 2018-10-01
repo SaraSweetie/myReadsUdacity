@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import * as BookAPI from '../BooksAPI'
+import * as BooksAPI from '../BooksAPI'
 import Book from '../components/book'
 import updateShelf from './main'
 
@@ -10,7 +10,8 @@ class Search extends React.Component {
 	      super(props);
 	      this.state = {
 	      	books: [],
-	        query: ''
+	        query: '',
+	        value: ''
 	      };
 	}
 
@@ -24,13 +25,14 @@ class Search extends React.Component {
 		console.log(this.state.query)
 
 		if(query.trim() ){
-		BookAPI.search(this.state.query)
+		BooksAPI.search(this.state.query)
 			.then( results => { 
 				if(results.error || this.state.books === undefined || this.state.books === '' || this.state.query.length === 0) {
 					this.setState({books: [] });
 					//There are no books for your search
 				}else {
 					this.setState({books: results})
+					this.setState({value: results})
 				}
   				
   			}).catch( error => {
