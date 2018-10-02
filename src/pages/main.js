@@ -11,9 +11,9 @@ class Main extends React.Component {
 	      	};
 	}
 
-	componentDidMount() {
-		this.getBooks()
-	}
+  componentDidMount() {
+    this.getBooks()
+  }
 
 	getBooks() {
 		BooksAPI.getAll()

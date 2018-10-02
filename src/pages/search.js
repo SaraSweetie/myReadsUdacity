@@ -30,11 +30,13 @@ class Search extends React.Component {
 		}
 
 		if(query.trim() ){
+			this.setState({books: [] });
 		BooksAPI.search(this.state.query) // this is logging nothing.... ?
 		
+
 			.then( results => { 
-				if(results.error || this.state.books === undefined || this.state.books === '') {
-					this.setState({books: [] });
+				if(results.error || this.state.books === undefined || this.state.books === '' ) {
+ 					this.setState({books: [] });
 					//There are no books for your search
 				}else {
 					this.setState({books: results})
