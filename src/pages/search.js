@@ -32,9 +32,8 @@ class Search extends React.Component {
 		if(query.trim() ){
 		BooksAPI.search(this.state.query) // this is logging nothing.... ?
 		
-
 			.then( results => { 
-				if(results.error || this.state.books === undefined || this.state.books === '' || this.state.query.length === 0) {
+				if(results.error || this.state.books === undefined || this.state.books === '') {
 					this.setState({books: [] });
 					//There are no books for your search
 				}else {
@@ -80,7 +79,7 @@ class Search extends React.Component {
             <div className="search-books-results">
               <ol className="books-grid">
 				        {this.state.books.length > 0 ? this.state.books.map( books => 
-                  <Book key={books.id} book={books} {...books} updateShelf={this.props.updateShelf} />)
+                  <Book key={books.id} book={books} {...books} updateShelf={this.updateShelf} />)
                   : (<p>No books match your seach.</p> ) 
             	  }
               </ol>
