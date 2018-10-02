@@ -11,8 +11,9 @@ class Main extends React.Component {
 	      	};
 	}
 
-  componentDidMount() {
-    this.getBooks()
+  componentDidMount(){
+    console.log(this);
+    this.getBooks();
   }
 
 	getBooks() {
@@ -26,14 +27,13 @@ class Main extends React.Component {
 	}
 
 	updateShelf = (book, shelf) => {
-        BooksAPI.update(book, shelf)
-        .then(() => {
-          book.shelf = shelf;
-    		this.getBooks()
-        }).catch( error => {
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        this.getBooks()
+      }).catch( error => {
   			console.log(`updateShelf had an error: ${error}`)
   		});
-  	}
+  }
 
 	render () {
 		return (

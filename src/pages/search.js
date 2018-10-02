@@ -15,6 +15,7 @@ class Search extends React.Component {
 
 	componentDidMount(){
 		console.log(this);
+		this.getBooks();
 	}
 
 	updateSearch(query) {
@@ -27,7 +28,6 @@ class Search extends React.Component {
 			this.setState({returnedBooks: [] });
 		}
 
-		if(query.trim() ){
 		BooksAPI.search(this.state.query) 
 			.then( results => { 
 				if(results.error) {
@@ -35,16 +35,15 @@ class Search extends React.Component {
 					//There are no books for your search
 				}else {
 					this.setState({returnedBooks: results})
-					this.updateShelf();
+					//this.updateShelf();
 				}
   				
   			}).catch( error => {
   				console.log(`there was an ${error}`)
   			})
-  		}
 	}
 
-	getBooks() {
+		getBooks() {
 		BooksAPI.getAll()
 		.then(results => { 
 			console.log(results);
@@ -55,14 +54,13 @@ class Search extends React.Component {
 	}
 
 	updateShelf = (book, shelf) => {
-        BooksAPI.update(book, shelf)
-        .then(() => {
-          book.shelf = shelf;
-    	this.getBooks()
-        }).catch( error => {
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        this.getBooks()
+      }).catch( error => {
   			console.log(`updateShelf had an error: ${error}`)
   		});
-  	}
+  }
 
 	render () {
 		return (
