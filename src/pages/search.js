@@ -8,6 +8,7 @@ class Search extends React.Component {
 	      super(props);
 	      this.state = {
 	      	books: [],
+	      	returnedBooks: [],
 	        query: ''
 	      };
 	}
@@ -22,26 +23,19 @@ class Search extends React.Component {
 	}
 
 	searchBooks(query) {
-		console.log(query)
-		console.log(this.state.query)
-
-		if( this.state.query.length === 1){
-			this.setState({books: [] });
+		if( this.state.query.length === 1 ){
+			this.setState({returnedBooks: [] });
 		}
 
 		if(query.trim() ){
-			this.setState({books: [] });
-		BooksAPI.search(this.state.query) // this is logging nothing.... ?
-		
-
+		BooksAPI.search(this.state.query) 
 			.then( results => { 
-				if(results.error || this.state.books === undefined || this.state.books === '' ) {
- 					this.setState({books: [] });
+				if(results.error) {
+ 					this.setState({returnedBooks: [] });
 					//There are no books for your search
 				}else {
-					this.setState({books: results})
+					this.setState({returnedBooks: results})
 					this.updateShelf();
-					console.log('updateShelf running??')
 				}
   				
   			}).catch( error => {
@@ -54,16 +48,17 @@ class Search extends React.Component {
 		BooksAPI.getAll()
 		.then(results => { 
 			console.log(results);
-			this.setState({ books : results})
+			this.setState({ returnedBooks : results})
 		}).catch( error => {
   			console.log(`getBooks had an error: ${error}`)
   		});
 	}
 
-	updateShelf = (e, book) => {
-        BooksAPI.update(book, e.target.value)
+	updateShelf = (book, shelf) => {
+        BooksAPI.update(book, shelf)
         .then(() => {
-    		this.getBooks();
+          book.shelf = shelf;
+    	this.getBooks()
         }).catch( error => {
   			console.log(`updateShelf had an error: ${error}`)
   		});
@@ -80,7 +75,7 @@ class Search extends React.Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-				        {this.state.books.length > 0 ? this.state.books.map( books => 
+				        {this.state.returnedBooks.length > 0 ? this.state.returnedBooks.map( books => 
                   <Book key={books.id} book={books} {...books} updateShelf={this.updateShelf} />)
                   : (<p>No books match your seach.</p> ) 
             	  }

@@ -25,9 +25,10 @@ class Main extends React.Component {
   		});
 	}
 
-	updateShelf = (e, book) => {
-        BooksAPI.update(book, e.target.value)
+	updateShelf = (book, shelf) => {
+        BooksAPI.update(book, shelf)
         .then(() => {
+          book.shelf = shelf;
     		this.getBooks()
         }).catch( error => {
   			console.log(`updateShelf had an error: ${error}`)

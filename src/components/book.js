@@ -12,7 +12,7 @@ const Book = ({book, updateShelf}) => {
                         }}></div>
                         <div className="book-shelf-changer">
                             <select
-                                onChange={(e) => {updateShelf(e, book) }}
+                                onChange={(e) => {updateShelf(book, book.shelf) }}
                                 value={book.shelf || "none"}
                             >
                                 <option value="move" disabled>Move to...</option>
