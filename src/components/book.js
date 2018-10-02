@@ -14,6 +14,7 @@ const Book = ({book, updateShelf}) => {
                             <select
                                 onChange={(e) => {updateShelf(book, book.shelf) }}
                                 value={book.shelf || "none"}
+				shelf={book.shelf}
                             >
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
