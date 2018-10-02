@@ -15,7 +15,6 @@ class Search extends React.Component {
 
 	componentDidMount(){
 		console.log(this);
-		this.getBooks();
 	}
 
 	updateSearch(query) {
