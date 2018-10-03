@@ -36,11 +36,12 @@ class Search extends React.Component {
   			})
 	}
 
-	getBooks() {
-		BooksAPI.getAll()
+	getBooks(book) {
+		BooksAPI.getAll(book)
 		.then(results => { 
-			console.log(results);
-			this.setState({ returnedBooks : results})
+			this.setState(state => ({
+        		returnedBooks: state.returnedBooks.filter(b => b.id !== book.id).concat([book])
+        	}) );
 		}).catch( error => {
   			console.log(`getBooks had an error: ${error}`)
   		});
@@ -48,7 +49,8 @@ class Search extends React.Component {
 
 	updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf)
-      .then(() => {
+      .then((results) => {
+      	book.shelf = shelf;
       }).catch( error => {
   			console.log(`updateShelf had an error: ${error}`)
   		});
