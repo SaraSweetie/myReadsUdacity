@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Book = ({book, shelf, updateShelf}) => {
+const Book = ({book, updateShelf}) => {
         return (
             <li>
                 <div className="book">
@@ -12,8 +12,8 @@ const Book = ({book, shelf, updateShelf}) => {
                         }}></div>
                         <div className="book-shelf-changer">
                             <select
-                                onChange={(e) => {updateShelf(book, book.shelf) }}
-                                shelf={book.shelf || "none"}
+                                onChange={(e) => {updateShelf(book, e.target.value) }}
+                                value={book.shelf ? book.shelf : "none"}
                             >
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>

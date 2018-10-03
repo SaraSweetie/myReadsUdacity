@@ -13,23 +13,14 @@ class Search extends React.Component {
 	      };
 	}
 
-	componentDidMount(){
-		console.log(this);
-	}
-
 	updateSearch(query) {
-		console.log('search bar updated');
 		this.setState({query: query}, this.searchBooks(query));
 	}
 
 	searchBooks(query) {
-		if( this.state.query.length === 1 ){
-			this.setState({returnedBooks: [] });
-		}
-
 		BooksAPI.search(this.state.query) 
 			.then( results => { 
-				if(results.error) {
+				if(!results || query === '') {
  					this.setState({returnedBooks: [] });
 					//There are no books for your search
 				}else {
@@ -42,7 +33,7 @@ class Search extends React.Component {
   			})
 	}
 
-		getBooks() {
+	getBooks() {
 		BooksAPI.getAll()
 		.then(results => { 
 			console.log(results);
@@ -55,7 +46,6 @@ class Search extends React.Component {
 	updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf)
       .then(() => {
-        this.getBooks()
       }).catch( error => {
   			console.log(`updateShelf had an error: ${error}`)
   		});
