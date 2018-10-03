@@ -20,7 +20,7 @@ class Search extends React.Component {
 	searchBooks(query) {
 		BooksAPI.search(this.state.query) 
 			.then( results => { 
-				if(!results || query === '') {
+				if(!results || query === '' || results.error ) {
  					this.setState({returnedBooks: [] });
 				}else {
 					results.forEach( b => {
@@ -33,6 +33,7 @@ class Search extends React.Component {
 				}
   			}).catch( error => {
   				console.log(`there was an ${error}`)
+  				console.log(this.state.query);
   			})
 	}
 
