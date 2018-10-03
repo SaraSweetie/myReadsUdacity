@@ -12,14 +12,12 @@ class Main extends React.Component {
 	}
 
   componentDidMount(){
-    console.log(this);
     this.getBooks();
   }
 
 	getBooks() {
 		BooksAPI.getAll()
 		.then(results => { 
-			console.log(results);
 			this.setState({ books : results})
 		}).catch( error => {
   			console.log(`getBooks had an error: ${error}`)

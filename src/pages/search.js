@@ -22,12 +22,15 @@ class Search extends React.Component {
 			.then( results => { 
 				if(!results || query === '') {
  					this.setState({returnedBooks: [] });
-					//There are no books for your search
 				}else {
-					this.setState({returnedBooks: results})
-					//this.updateShelf();
+					results.forEach( b => {
+						let findShelf = this.state.books.filter(
+							book => book.id === b.id);
+							if(findShelf[0]) { b.shelf = findShelf[0].shelf;
+							}
+					});
+					return this.setState({returnedBooks: results})
 				}
-  				
   			}).catch( error => {
   				console.log(`there was an ${error}`)
   			})
