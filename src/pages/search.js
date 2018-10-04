@@ -13,15 +13,29 @@ class Search extends React.Component {
 	      };
 	}
 
+	componentDidMount(){
+    	this.getBooks();
+  	}
+
+  	getBooks() {
+		BooksAPI.getAll()
+		.then(results => { 
+			this.setState({ books : results})
+		}).catch( error => {
+  			console.log(`getBooks had an error: ${error}`)
+  		});
+	}
+
 	updateSearch(query) {
 		this.setState({query: query}, this.searchBooks(query));
 	}
 
 	searchBooks(query) {
-		BooksAPI.search(this.state.query) 
+		BooksAPI.search(this.state.query.trim()) 
 			.then( results => { 
 				if(!results || query === '' || results.error ) {
  					this.setState({returnedBooks: [] });
+ 					//no books retruned
 				}else {
 					results.forEach( b => {
 						let findShelf = this.state.books.filter(
@@ -37,21 +51,13 @@ class Search extends React.Component {
   			})
 	}
 
-	getBooks(book) {
-		BooksAPI.getAll(book)
-		.then(results => { 
-			this.setState(state => ({
-        		returnedBooks: state.returnedBooks.filter(b => b.id !== book.id).concat([book])
-        	}) );
-		}).catch( error => {
-  			console.log(`getBooks had an error: ${error}`)
-  		});
-	}
-
 	updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf)
       .then((results) => {
       	book.shelf = shelf;
+      	this.setState(state => ({
+        		books: state.books.filter(b => b.id !== book.id).concat([book])
+        	}) );
       }).catch( error => {
   			console.log(`updateShelf had an error: ${error}`)
   		});
@@ -68,8 +74,10 @@ class Search extends React.Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-				        {this.state.returnedBooks.length > 0 ? this.state.returnedBooks.map( books => 
-                  <Book key={books.id} book={books} {...books} updateShelf={this.updateShelf} />)
+				        {this.state.returnedBooks.length > 0 ? this.state.returnedBooks.map( books => {
+				        	return <Book key={books.id} book={books} {...books} updateShelf={this.updateShelf} />
+				        }
+                  )
                   : (<p>No books match your seach.</p> ) 
             	  }
               </ol>
